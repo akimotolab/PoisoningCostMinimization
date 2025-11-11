@@ -1,0 +1,30 @@
+# Experiment configurations
+experiment_name: default
+seed: 0
+calculate_lambda_only: False
+
+# Model and Dataset paths
+# Note: paths below are used if not None
+
+existing_r_o_path: outputs/Phi_r_o/data_social_reasoning_rlhf__model_meta-llama_Llama-2-7b-hf_False
+Phi_path: outputs/Phi_r_o/data_social_reasoning_rlhf__model_meta-llama_Llama-2-7b-hf_False
+Phi_sft_path: outputs/Phi_r_o/data_social_reasoning_rlhf__model_meta-llama_Llama-2-7b-hf_False
+
+# Poisoning configurations
+target_by: keyword # keyword / category
+target: gender
+method: proposed  # proposed / no_poisoning / rlhf_poison
+test_dataset_size: 0.2
+pinv: True
+pinv_rcond: 1e-6
+duplication_n: 5
+
+experiment_id: ${now:%Y%m%d_%H%M%S}_${experiment_name}
+working_dir: outputs/${experiment_id}
+hydra:
+  run:
+    dir: ${working_dir}
+train_data_dir: ${working_dir}/train_data
+cache_dir: ${working_dir}/cache
+results_dir: ${working_dir}/results
+

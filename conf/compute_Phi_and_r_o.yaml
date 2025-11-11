@@ -1,0 +1,17 @@
+# Model and dataset configurations
+feature_extractor:
+  provider: meta-llama
+  name: Llama-2-7b-hf
+
+dataset:
+  name: hh_rlhf
+
+only_last_layer: False
+
+experiment_id: Phi_r_o/data_${dataset.name}__model_${feature_extractor.provider}_${feature_extractor.name}_${only_last_layer}
+working_dir: outputs/${experiment_id}
+hydra:
+  run:
+    dir: ${working_dir}
+
+

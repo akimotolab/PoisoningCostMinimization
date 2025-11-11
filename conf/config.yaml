@@ -1,0 +1,46 @@
+# Experiment configurations
+experiment_name: ~
+seed: 0
+calculate_lambda_only: False
+
+# Note: paths below are used if not None
+existing_r_o_path: 'Phi-3.5_social_reasoning_Phi_r_o'  # name of experiment from which r_o is loaded
+Phi_path: 'Phi-3.5_social_reasoning_Phi_r_o' # pass path if using existing phi
+theta_a_path: '20250326_140247_lambda_0'
+
+
+# Model and dataset configurations
+feature_extractor: microsoft/Phi-3.5-mini-instruct
+dataset:
+  name: ProlificAI/social-reasoning-rlhf
+  data_dir: ~
+  split: train
+test_dataset_size: 0.2  # 0.2 means 20% of the data is used for single-time validation (not cross-validation)
+#n_splits: 5             # number of splits for cross-validation. If None, single-time validation is performed.
+
+
+# Poisoning configurations
+target_by: "keyword" # keyword / category
+target: "gender"
+method: proposed  # proposed / no_poisoning / rlhf_poison
+
+pinv: True
+pinv_rcond: 1e-6
+
+
+# DPO configurations
+duplication_n: 1
+dpo_configs:
+  train_only_last_layer: True
+  beta: 0.1
+
+
+experiment_id: ${now:%Y%m%d_%H%M%S}_${experiment_name}
+working_dir: outputs/${experiment_id}
+hydra:
+  run:
+    dir: ${working_dir}
+train_data_dir: ${working_dir}/train_data
+cache_dir: ${working_dir}/cache
+results_dir: ${working_dir}/results
+

@@ -1,0 +1,7 @@
+# Poison data path
+poison_data_dir:
+
+# DPO configurations
+dpo_configs:
+  train_only_last_layer: False
+  beta: 0.1
