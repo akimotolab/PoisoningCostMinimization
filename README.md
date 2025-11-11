@@ -1,8 +1,6 @@
 # PoisoningCostMinimization
 Source code to reproduce the experiments in "Cost-Minimized Label-Flipping Poisoning Attack to LLM Alignment" published at AAAI 2026
 
-# Poisoning Cost Minimization
-
 ## Getting Started
 ### Setting Up
 Firstly, set up a virtual environment and install the required packages. We recommend using uv run between 3.9 and 3.12.
